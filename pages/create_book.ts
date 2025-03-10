@@ -23,8 +23,8 @@ router.post('/', async (req: Request, res: Response) => {
   if (familyName && firstName && genreName && bookTitle) {
     try {
       const book = new Book({});
-      await book.saveBookOfExistingAuthorAndGenre(familyName, firstName, genreName, bookTitle);
-      res.status(200).send(book);
+      const savedBook = await book.saveBookOfExistingAuthorAndGenre(familyName, firstName, genreName, bookTitle);
+      res.status(200).send(savedBook);
     } catch (err: unknown) {
       res.status(500).send('Error creating book: ' + (err as Error).message);
     }
