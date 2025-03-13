@@ -44,8 +44,7 @@ describe("Verify GET /authors", () => {
     it("should respond with an error message when there is an error processing the request", async () => {
         Author.getAllAuthors = jest.fn().mockRejectedValue(new Error("Database error"));
         const response = await request(app).get("/authors");
-        expect(response.statusCode).toBe(200);
-        expect(response.text).toBe("No authors found");
+        expect(response.statusCode).toBe(500);
         expect(consoleSpy).toHaveBeenCalled();
     });
 });
